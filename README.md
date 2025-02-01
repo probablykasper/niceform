@@ -3,7 +3,7 @@ Convenient form validation and typing for SvelteKit. Based on Superforms and Zod
 
 Might turn this into an actual package later
 
-### Example `+page.server.ts`:
+### Example `+page.server.ts`
 ```ts
 import { z } from 'zod'
 import { nice_form } from '$lib/niceform'
@@ -68,4 +68,17 @@ Includes type-safe `name` attribute, automatic error messages and label with aut
 		</span>
 	{/if}
 </div>
+```
+
+### i18n example
+```ts
+import { z } from 'zod'
+import * as m from '$lib/paraglide/messages'
+import { set_error_map } from './niceform'
+
+export const form_errors = set_error_map({
+	invalid_email: m.invalid_email,
+})
+
+export const email_schema = z.string().email(form_errors.invalid_email).max(100)
 ```
