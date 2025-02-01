@@ -82,7 +82,7 @@ export const email_schema = z.string().email(form_errors.invalid_email).max(100)
 
 Might change this API
 
-```
+```ts
 <script lang="ts">
 import { enhance } from '$app/forms'
 import { auto_snapshot } from '$lib/niceform'
