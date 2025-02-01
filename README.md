@@ -77,3 +77,21 @@ export const form_errors = set_error_map({
 
 export const email_schema = z.string().email(form_errors.invalid_email).max(100)
 ```
+
+### Snapshots
+
+Might change this API
+
+```
+<script lang="ts">
+import { enhance } from '$app/forms'
+import { auto_snapshot } from '$lib/niceform'
+
+const snapshotter = auto_snapshot()
+export const snapshot = auto_snapshot()
+</script>
+
+<form method="post" use:enhance use:snapshotter.container>
+	<Input {form} type="text" data-snapshot />
+</form>
+```
