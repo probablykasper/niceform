@@ -3,10 +3,11 @@ Convenient form validation and typing for SvelteKit. Based on Superforms and Zod
 
 Might turn this into an actual package later
 
-- ✅ `name` attribute typing
-- ✅ Multiple forms
-- ✅ i18n
-- ✅ Snapshots
+Features
+- `name` attribute typing
+- Multiple forms
+- i18n
+- Snapshots
 
 ### Example `+page.server.ts`
 ```ts
