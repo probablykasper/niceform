@@ -136,3 +136,48 @@ async function zod<Z extends ZodSchema, D extends FormInput | undefined>(
 export const nice_form = {
 	zod,
 }
+
+export function auto_snapshot() {
+	let container_el: HTMLElement | undefined
+	const selector = 'input[data-snapshot],textarea[data-snapshot],select[data-snapshot]'
+	return {
+		capture() {
+			if (!container_el?.querySelectorAll) {
+				throw new Error('auto_snapshot: container element not set')
+			}
+			const elements = container_el.querySelectorAll(selector)
+			const values: Record<string, string> = {}
+			for (const element of elements) {
+				if (
+					element instanceof HTMLInputElement ||
+					element instanceof HTMLSelectElement ||
+					element instanceof HTMLTextAreaElement
+				) {
+					values[element.name] = element.value
+				}
+			}
+			return values
+		},
+		restore(value: Record<string, string>) {
+			if (!container_el?.querySelectorAll) {
+				throw new Error('auto_snapshot: container element not set')
+			}
+			const elements = container_el.querySelectorAll(selector)
+			for (const element of elements) {
+				if (
+					(element instanceof HTMLInputElement ||
+						element instanceof HTMLSelectElement ||
+						element instanceof HTMLTextAreaElement) &&
+					value[element.name]
+				) {
+					element.value = value[element.name]
+					// Trigger Svelte state to updates
+					element.dispatchEvent(new Event('input'))
+				}
+			}
+		},
+		container(node: HTMLElement) {
+			container_el = node
+		},
+	}
+}
