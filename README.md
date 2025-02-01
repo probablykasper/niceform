@@ -38,10 +38,8 @@ Includes type-safe `name` attribute, automatic error messages and label with aut
 
 ```svelte
 <script lang="ts" generics="F extends PartialNiceForm">
-	import type { HTMLInputAttributes } from 'svelte/elements'
-	import { scale, slide } from 'svelte/transition'
-	import { backOut } from 'svelte/easing'
 	import { sequential_num, type AddFormProps, type PartialNiceForm } from './niceform'
+	import type { HTMLInputAttributes } from 'svelte/elements'
 
 	let {
 		form,
@@ -61,13 +59,10 @@ Includes type-safe `name` attribute, automatic error messages and label with aut
 	{/if}
 	<input class={['input', props['class']]} id={label ? id : undefined} bind:value {...props} />
 	{#if props.name && errors[props.name]}
-		<span class="block origin-top-left" in:scale={{ duration: 250, easing: backOut }}>
-			<span class="block text-sm text-red-500" transition:slide={{ duration: 100 }}>
-				{errors[props.name]}
-			</span>
-		</span>
+		<span class="text-red-500">{errors[props.name]}</span>
 	{/if}
 </div>
+
 ```
 
 ### i18n example
