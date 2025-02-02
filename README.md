@@ -63,7 +63,7 @@ Includes type-safe `name` attribute, automatic error messages and label with aut
 	{#if label}
 		<label class="text-label mb-0.5 block text-sm" for={props.id ?? id}>{label}</label>
 	{/if}
-	<input class={['input', props['class']]} id={label ? id : undefined} bind:value {...props} />
+	<input id={label ? id : undefined} bind:value {...props} class={['input', props['class']]} />
 	{#if props.name && errors[props.name]}
 		<span class="text-red-500">{errors[props.name]}</span>
 	{/if}
