@@ -78,7 +78,7 @@ async function zod<Z extends ZodSchema, D extends FormInput | undefined>(
 	data?: D,
 ): Promise<D extends object ? NiceFormServer<Z> : NiceForm<Z>> {
 	if (data) {
-		const sf_form = await superValidate(data, zod_adapter(schema))
+		const sf_form = await superValidate(data, zod_adapter(schema), { strict: true )
 		let translated_single_error_message = ''
 		let single_error_message = ''
 		for (const [key, field_errors] of Object.entries(sf_form.errors)) {
